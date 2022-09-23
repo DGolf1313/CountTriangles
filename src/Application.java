@@ -2,17 +2,31 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Scanner;
 
 import entities.Triangle;
 
 public class Application {
 
 	public static void main(String[] args) {
-		//Integer array 
-		Integer[] arrayTriangleValues = {45,23,3,6,29,7,9,22,4};
-		//45,29,23,6,3
 		
-		determineNumberOfTriangles(arrayTriangleValues);
+		try (Scanner scanner = new Scanner(System.in)) {
+			System.out.println("Enter a list of numbers (seperated by commas with no spaces) to calculate how many triangles can be made.  Ex: 3,6,1,2");
+			String stringTriangleValues = scanner.nextLine();
+			String[] numberString = stringTriangleValues.split(",");
+			Integer[] arrayTriangleValues = new Integer[numberString.length];
+			for(int i = 0;i < numberString.length;i++)
+			{
+				arrayTriangleValues[i] = Integer.parseInt(numberString[i]);
+			}
+			
+			determineNumberOfTriangles(arrayTriangleValues);
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 	}
 	
 	public static List<Triangle> determineNumberOfTriangles(Integer[] sides) {
